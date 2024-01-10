@@ -4,7 +4,16 @@ class Vector:
 		self.negative = negative
 
 	def __str__(self):
-		return str(self.positive[-1::-1]+self.negative[::])
+		start, end = 0, 0
+		for i, e in enumerate(self.positive[-1::-1]):
+			if e != 0:
+				start = len(self.positive) - i
+				break
+		for i, e in enumerate(self.negative[-1::-1]):
+			if e != 0:
+				end = len(self.negative) - i
+				break
+		return str(self.positive[start-1::-1]+self.negative[:end:])
 		#return str(self.positive[-1::-1])+str(self.negative[::])
 
 	def append(self, element=1, in_negative=False):
