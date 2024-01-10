@@ -76,3 +76,10 @@ class Vector:
 			self._resize(index)
 			return self.positive[index]
 
+	def __setitem__(self, index, value):
+		if index < 0:
+			self._resize(-index-1, True)
+			self.negative[-index-1] = value
+		else:
+			self._resize(index)
+			self.positive[index] = value
