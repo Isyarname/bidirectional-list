@@ -66,17 +66,13 @@ class Vector:
 		else:
 			length = len(self.positive) - 1
 		if index > length:
-			print(length, index)
 			self._increase_size(index-length, in_negative)
 
 	def __getitem__(self, index):
-		print(index)
 		if index < 0:
-			print('if')
 			self._resize(-index-1, True)
 			return self.negative[-index-1]
 		else:
 			self._resize(index)
-			print(self)
 			return self.positive[index]
 
