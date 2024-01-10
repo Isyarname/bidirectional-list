@@ -19,8 +19,8 @@ class Vector:
 		else:
 			self.positive.insert(index)
 
-	def count(self):
-		return self.positive.count() + self.negative.count()
+	def count(self, x):
+		return self.positive.count(x) + self.negative.count(x)
 
 	def reverse(self, index=0):
 		if index < 0:
