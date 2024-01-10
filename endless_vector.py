@@ -5,18 +5,13 @@ class Vector:
 
 	def __str__(self):
 		return str(self.positive[-1::-1]+self.negative[::])
+		#return str(self.positive[-1::-1])+str(self.negative[::])
 
 	def append(self, element=1, in_negative=False):
 		if in_negative:
 			self.negative.append(element)
 		else:
 			self.positive.append(element)
-
-	def extend(self, L: list, in_negative=False):
-		if in_negative:
-			self.negative.extend(L)
-		else:
-			self.positive.extend(L)
 
 	def pop(self, index, x):
 		if index < 0:
@@ -42,9 +37,10 @@ class Vector:
 
 	def insert(self, index, x):
 		if index < 0:
-			self.positive.insert(-index-1, x)
+			self.negative.insert(-index-1, x)
 		else:
 			self.positive.insert(index, x)
+
 	def clear(self):
 		self.positive.clear()
 		self.negative.clear()
@@ -55,23 +51,32 @@ class Vector:
 		except ValueError:
 			self.negative.remove(x)
 
-	def _increase_size(self, length=1, in_negative=False, element=0):
+	def extend(self, L: list, in_negative=False):
+		if in_negative:
+			self.negative.extend(L)
+		else:
+			self.positive.extend(L)
+
+	def _increase_size(self, length, in_negative=False, element=0):
 		self.extend([element]*length, in_negative)
 
-	def _resize(self, index, in_negative):
+	def _resize(self, index, in_negative=False):
 		if in_negative:
-			length = len(self.negative)
+			length = len(self.negative) - 1
 		else:
-			length = len(self.positive)
+			length = len(self.positive) - 1
 		if index > length:
+			print(length, index)
 			self._increase_size(index-length, in_negative)
 
 	def __getitem__(self, index):
+		print(index)
 		if index < 0:
-			index = -index - 1
-			self._resize(index, True)
-			return self.negative[index]
+			print('if')
+			self._resize(-index-1, True)
+			return self.negative[-index-1]
 		else:
 			self._resize(index)
+			print(self)
 			return self.positive[index]
 
