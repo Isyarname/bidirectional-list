@@ -1,19 +1,34 @@
 class BList:
-	def __init__(self, positive=[0], negative=[0]):
+	def __init__(self, positive=[0], negative=[0], print_format='without zeros'):
 		self.positive = positive[::-1]
 		self.negative = negative
+		self.print_format = print_format
 
 	def __str__(self):
 		start, end = 0, 0
 		for i, e in enumerate(self.positive[::-1]):
 			if e != 0:
-				start = len(self.positive) - i
+				start = len(self.positive) - 1 - i
 				break
 		for i, e in enumerate(self.negative[::-1]):
 			if e != 0:
-				end = len(self.negative) - i
+				end = len(self.negative) - 1 - i
 				break
-		return str(self.positive[start-1::-1]+self.negative[:end:])
+		out_pos = self.positive[start::-1]
+		out_neg = self.negative[:end+1:]
+		out_list = out_pos + out_neg
+		out_str = ''
+		if self.print_format == 'without zeros':
+			out_str = str(out_list)
+		if self.print_format == 'with zeros':
+			out_str = '[0, ..., 0, ' + str(out_list)[1:-1] + ', 0, ..., 0]'
+		elif self.print_format == 'number':
+			for e in out_pos:
+				out_str += str(e)
+			out_str += ','
+			for e in out_neg:
+				out_str += str(e)
+		return out_str
 
 	def append(self, element=1, in_negative=False):
 		if in_negative:
