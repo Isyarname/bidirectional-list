@@ -1,15 +1,15 @@
 class BList:
 	def __init__(self, positive=[0], negative=[0]):
-		self.positive = positive
+		self.positive = positive[::-1]
 		self.negative = negative
 
 	def __str__(self):
 		start, end = 0, 0
-		for i, e in enumerate(self.positive[-1::-1]):
+		for i, e in enumerate(self.positive[::-1]):
 			if e != 0:
 				start = len(self.positive) - i
 				break
-		for i, e in enumerate(self.negative[-1::-1]):
+		for i, e in enumerate(self.negative[::-1]):
 			if e != 0:
 				end = len(self.negative) - i
 				break
