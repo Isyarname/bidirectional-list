@@ -20,7 +20,7 @@ class BList:
 		out_str = ''
 		if self.print_format == 'without zeros':
 			out_str = str(out_list)
-		if self.print_format == 'with zeros':
+		elif self.print_format == 'with zeros':
 			out_str = '[0, ..., 0, ' + str(out_list)[1:-1] + ', 0, ..., 0]'
 		elif self.print_format == 'number':
 			for e in out_pos:
